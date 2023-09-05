@@ -28,6 +28,9 @@
                 </tbody>
             </table>
 
+            <img src="{{ asset('uploads/' ~ user.getFilepath) }}" alt="Avatar" class="img-fluid img-thumbnail">
+
+
             <div class="d-flex justify-content-between">
                 <a href="{{ path('app_user_index') }}" class="btn btn-secondary mx-2">Revenir à la liste</a>
                 <a class="btn btn-info mx-2" href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
