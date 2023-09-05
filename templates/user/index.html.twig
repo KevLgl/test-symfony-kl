@@ -15,7 +15,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Adresse</th>
-                <th>Filepath</th>
+                <th>Avatar</th>
                 <th>actions</th>
             </tr>
             </thead>
@@ -25,8 +25,9 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.address }}</td>
-                    <td>{{ user.filepath }}</td>
-                    {#                TODO: ajouter image#}
+                    <td>
+                        <img src="{{ asset('uploads/' ~ user.getFilepath) }}" alt="Avatar" class="img-fluid img-thumbnail">
+                    </td>
                     <td>
                         <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                         <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
