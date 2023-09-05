@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
 {
@@ -15,9 +16,19 @@ class UserType extends AbstractType
         $builder
             ->add('name')
             ->add('address')
-            ->add('filepath')
             ->add('avatar', FileType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false, // Changez cela selon vos besoins
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k', // Taille maximale du fichier
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image au format JPEG ou PNG',
+                    ])
+                ],
             ])
         ;
     }
