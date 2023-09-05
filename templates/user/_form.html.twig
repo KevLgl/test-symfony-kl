@@ -1,4 +1,12 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+      {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_label(form.adress) }}
+        {{ form_widget(form.adress) }}
+        {{ form_label(form.filepath) }}
+        {{ form_widget(form.filepath) }}
+        {{ form_label(form.avatar) }}
+        {{ form_widget(form.avatar) }}
+        {{ form_rest(form) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
