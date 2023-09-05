@@ -30,6 +30,17 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $avatarFile = $form->get('avatar')->getData();
+
+            if ($avatarFile) {
+                $avatarFileName = uniqid().'.'.$avatarFile->guessExtension();
+                $avatarFile->move(
+                    $this->getParameter('uploads_directory'),
+                    $avatarFileName
+                );
+                $user->setFilepath($avatarFileName);
+            }
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -38,7 +49,7 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
